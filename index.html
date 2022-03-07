@@ -4,38 +4,41 @@
 <body>
     <div id="root"></div>
 </body>
+
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    /*****NOTE
-     * react-dom ; React ele.들을 HTML body에 두는 역할
-     *  
-     */
     const root = document.getElementById("root");
-    const Title = () => (
-        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-            Hello new one!</h3>
-    );
-    // function Title2() {
-    //     return (
-    //         <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-    //             Hello new one!</h3>);
-    // }
+    /*************
+     * useState의 배열 (2)[0,f]를 풀면
+    let counter = 0;
+    function countUp(){
 
-    const Button = () => (
-        <button style={{
-            backgroundColor: "tomato",
-        }} onClick={() => console.log("im clicked")}>click me!</button>
-    );
+        어떻게 하면 배열에서 요소들을 꺼내서 이름을 부여할 수 있을까?
+        const food = ['tomato', 'potato']
+        const tmt = food[0];
+        const potato = food[1] ...? 노답
 
-    const Container =()=> (
-        <div>
-            <Title />
-            <Button />
-        </div>
-    );
-    ReactDOM.render(<Container />, root); //span을 root안에 render 해줘
+        const [myFavFood, mySecFood] = food;
+        //tomato, potato
+
+    }
+    ***************/
+
+    function App() {
+        const [counter, setCounter] = React.useState(0); // counter(데이터), setCounter(Function)
+        const onClick = () => {
+            setCounter(counter+1);
+            console.log(counter);
+        };
+            return (
+                <div>
+                    <h3>Total Clicks :{counter}</h3>
+                    <button onClick={onClick}>click me!</button>
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, root); //span을 root안에 render 해줘
 </script>
-
 </html>
