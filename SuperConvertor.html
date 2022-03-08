@@ -9,9 +9,8 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    const root = document.getElementById("root");
 
-    function App() {
+    function MinutesToHours() {
         const [amount, setAmount] = React.useState(0); //사용자들이 입력한 값
         const [inverted, setInverted] = React.useState(false);
         const onChange = (event) => {
@@ -20,19 +19,18 @@
         }
         const reset = () => setAmount(0);
         {/*const onFlip = () =, setInverted(!inverted);*/ } {/*이거보단*/ }
-        const onFlip = () => {
+        const onInvert = () => {
             reset(); //플립하면 값이 계속 바뀌는게 아니라 0 0 으로 리셋~
-    , setInverted((current) => !current)
+            setInverted((current) => !current)
         };
         return (
             <div>
-                <h1>Super Converter</h1>
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                    // 플립이 (기본값 false) true 상태라면 tkdxofkaus 시에서 분으로 단위변환
-                    // 시에서 분 단위로 변환 중이니까 amount * 60
-                    // false 상태라면 입력한 값 그대로 출력
+                        // 플립이 (기본값 false) true 상태라면 tkdxofkaus 시에서 분으로 단위변환
+                        // 시에서 분 단위로 변환 중이니까 amount * 60
+                        // false 상태라면 입력한 값 그대로 출력
                         value={inverted ? amount * 60 : amount}
                         id="minutes"
                         placeholder="Minutes"
@@ -45,9 +43,9 @@
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input
-                    // 플립이 true 값이면 입력한 값을 보여주고
-                    // inverted가 false; 기본값이면 분 amount에서 60을 나누기 해준다
-                    // ! filped를 invert로 다 바꿨다 !
+                        // 플립이 true 값이면 입력한 값을 보여주고
+                        // inverted가 false; 기본값이면 분 amount에서 60을 나누기 해준다
+                        // ! filped를 invert로 다 바꿨다 !
                         value={inverted ? amount : Math.round(amount / 60)}
                         id="hours"
                         placeholder="Hours"
@@ -58,10 +56,38 @@
                 </div>
                 <button onClick={reset}>Reset</button>
                 {/*filp 버튼을 누르면 반대로 minutes를 쓸 수 없게 되고 hours에 값을 입력 할 수 있다*/}
-                <button onClick={onFlip}>Flip</button>
+                <button onClick={onInvert}>{inverted ? 'Turn back' : 'Invert'}</button>
             </div>
         );
     }
+    function KmToMiled() {
+        return (
+        <div>
+            <h3>Km 2 M</h3>
+        </div>
+        );
+    }
+    function App() {
+        const [index, setIndex] = React.useState("empty");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        };
+        return (
+            <div>
+                <h1>Super Converter</h1>
+                <select onChange={onSelect} value={index}>
+                    <option value="empty">Select your units</option>
+                    <option value="0">Minutes & Hours</option>
+                    <option value="1">Km & Miles</option>
+                </select>
+                <hr/>
+                {index === "empty" ? "please select your units !" : null}
+                {index === "0" ? <MinutesToHours /> : null}
+                {index === "1" ? <KmToMiled /> : null}
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root); //span을 root안에 render 해줘
 </script>
 
