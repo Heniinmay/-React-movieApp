@@ -12,41 +12,48 @@
     const root = document.getElementById("root");
 
     function App() {
-        const [amount, setAmount] = React.useState(0);
-        const [filpped, setFlipped] = React.useState(false);
+        const [amount, setAmount] = React.useState(0); //사용자들이 입력한 값
+        const [inverted, setInverted] = React.useState(false);
         const onChange = (event) => {
             // console.log(event.target.value);
             setAmount(event.target.value);
         }
         const reset = () => setAmount(0);
-        {/*const onFlip = () => setFlipped(!filpped);*/}{/*이거보단*/}
+        {/*const onFlip = () =, setInverted(!inverted);*/ } {/*이거보단*/ }
         const onFlip = () => {
-            reset(); //플립하면 값이 계속 바뀌는게 아니라 0 0 으로 리셋
-            setFlipped((current) => !current)};
+            reset(); //플립하면 값이 계속 바뀌는게 아니라 0 0 으로 리셋~
+    , setInverted((current) => !current)
+        };
         return (
             <div>
                 <h1>Super Converter</h1>
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                        value={filpped? amount*60:amount}
+                    // 플립이 (기본값 false) true 상태라면 tkdxofkaus 시에서 분으로 단위변환
+                    // 시에서 분 단위로 변환 중이니까 amount * 60
+                    // false 상태라면 입력한 값 그대로 출력
+                        value={inverted ? amount * 60 : amount}
                         id="minutes"
                         placeholder="Minutes"
                         type="number"
-                        onChange={onChange} 
-                        disabled={filpped}
-                        />
+                        onChange={onChange}
+                        disabled={inverted}
+                    />
                 </div>
                 {/*<h4>u want to convert {minutes}</h4>}*/}
                 <div>
-                <label htmlFor="hours">Hours</label>
-                <input
-                    value={filpped ? amount : Math.round(amount/60)}
-                    id="hours"
-                    placeholder="Hours"
-                    type="number" 
-                    disabled={!filpped}
-                    onChange={onChange}
+                    <label htmlFor="hours">Hours</label>
+                    <input
+                    // 플립이 true 값이면 입력한 값을 보여주고
+                    // inverted가 false; 기본값이면 분 amount에서 60을 나누기 해준다
+                    // ! filped를 invert로 다 바꿨다 !
+                        value={inverted ? amount : Math.round(amount / 60)}
+                        id="hours"
+                        placeholder="Hours"
+                        type="number"
+                        disabled={!inverted}
+                        onChange={onChange}
                     />
                 </div>
                 <button onClick={reset}>Reset</button>
