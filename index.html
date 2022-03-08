@@ -29,8 +29,8 @@
     function App() {
         const [counter, setCounter] = React.useState(0); // counter(데이터), setCounter(Function)
         const onClick = () => {
-            setCounter(counter+1);
-            console.log(counter);
+           // setCounter(counter + 1);
+           setCounter((current) => current + 1)
         };
             return (
                 <div>
