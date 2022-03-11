@@ -28,16 +28,17 @@
             </button>
         );
     }
+    const MemorizedBtn = React.memp(Btn);
     function App() {
         const [value, setValue] = React.useState("Save Changes");
         const changeValue = () => setValue('Revert Changes');
         return (
             <div>
                 {/*btn({banana:"save Changes"})*/}
-                <Btn text={value} onClick={changeValue} />
+                <MemorizedBtn text={value} onClick={changeValue} />
                 {/*not addEventListener가아니다, props로써 이름을 임의 지정 한 것이다.*/}
                 {/*니가 여기에 뭘 넣근지간에, 그것들은 단지 prop이 될 거야*/}
-                <Btn text="Continue" />
+                <MemorizedBtn text="Continue" />
             </div>
         );
     }
