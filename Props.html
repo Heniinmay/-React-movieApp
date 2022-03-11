@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    function Btn({ text, onClick }) { //there is no second argument here.
+        // Btn(props) = Btn({banana})
+        //it is just shortcut, property를 오브젝트로 부터 꺼내는 것.
+        //console.log(props); //object가 출력, 2개가 온다 밑에서 두 번 렌더링 했으니까
+        return (
+            <button
+                onClick={onClick}
+                style={{
+                    backgroundColor: "teal",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: 0,
+                    borderRadius: 10,
+                }}
+            >
+                {text} {/*=={props.banana}*/}
+            </button>
+        );
+    }
+    function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue('Revert Changes');
+        return (
+            <div>
+                {/*btn({banana:"save Changes"})*/}
+                <Btn text={value} onClick={changeValue} />
+                {/*not addEventListener가아니다, props로써 이름을 임의 지정 한 것이다.*/}
+                {/*니가 여기에 뭘 넣근지간에, 그것들은 단지 prop이 될 거야*/}
+                <Btn text="Continue" />
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+    //내가 만들고 사용하는 모든 컴포넌트들은 ()로 인자를 받는다.
+    // btn에서 설정 Btn(props){}...
+    // -> Btn() 함수를 불러서 banana라는 인자를 보낸다
+
+</script>
+
+</html>
